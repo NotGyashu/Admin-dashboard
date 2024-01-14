@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: #a5b4fc;
+        width: 5px;
+        border-radius: 10px;
+    }
+
+    /* Corrected the selector and added a new rule */
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: #312e81;
+    }
+
+    /* Corrected the box-shadow syntax */
+    .box-shadow {
+    box-shadow: 1px 1px 3px 3px rgba(223, 227, 235, 0.75);
+        -webkit-box-shadow: 1px 1px 3px 3px rgba(223, 227, 235, 0.75);
+        -moz-box-shadow: 1px 1px 3px 3px rgba(223, 227, 235, 0.75);
+    }
+
+        .custom-underline {
+            text-decoration: underline;
+            text-decoration-style: dotted;
+        }
+}
