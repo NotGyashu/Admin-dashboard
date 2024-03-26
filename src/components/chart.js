@@ -1,9 +1,8 @@
-
-import React from "react";import {
+import React from "react";
+import {
   AreaChart,
   Area,
   XAxis,
-
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
@@ -12,21 +11,20 @@ import { useContext } from "react";
 import ThemeContext from "../context/themecontext";
 
 const data = [
-  {name:"january",Total:300},
-  {name:"february",Total:900},
-  {name:"march",Total:400},
-  {name:"april",Total:1100},
-  {name:"may",Total:700},
-  {name:"april",Total:1000},
-   
+  { name: "january", Total: 300 },
+  { name: "february", Total: 900 },
+  { name: "march", Total: 400 },
+  { name: "april", Total: 1100 },
+  { name: "may", Total: 700 },
+  { name: "april", Total: 1000 },
 ];
 
-export const Chart = ({aspect, title}) => {
-   const { darkMode,  } = useContext(ThemeContext);
-  
+export const Chart = ({ aspect, title }) => {
+  const { darkMode } = useContext(ThemeContext);
+
   return (
     <div
-      class={`box-shadow flex-[6] w-[60%] p-3 rounded-sm  ${
+      class={`box-shadow  w-full p-3 m-4 rounded-sm  ${
         darkMode ? "text-gray-200" : " text-gray-600"
       }`}
     >

@@ -3,63 +3,56 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authcontext";
-import { collection,getDoc, doc } from "firebase/firestore";
+import { collection, getDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import CircularProgress from "@mui/material/CircularProgress";
 const Login = () => {
   const [error, setError] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading,setLoading] = useState(false)
-  
-  const nav = useNavigate()
-  const {dispatch}= useContext(AuthContext)
+  const [loading, setLoading] = useState(false);
+
+  const nav = useNavigate();
+  const { dispatch } = useContext(AuthContext);
   const handleLogin = async (e) => {
-   
     e.preventDefault();
-setLoading(true)
+    setLoading(true);
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
         password
       );
-     const user = userCredential.user;
+      const user = userCredential.user;
 
-     const adminDocRef = doc(collection(db, "admin"), user.uid);
+      const adminDocRef = doc(collection(db, "admin"), user.uid);
 
-     try {
-       const adminDoc = await getDoc(adminDocRef);
-const adminData = adminDoc.data();
-console.log(adminData);
-       dispatch({type:"LOGIN",payload:adminData})
-         
-     } catch (error) {
-       console.error("Error getting document:", error);
-     }
+      try {
+        const adminDoc = await getDoc(adminDocRef);
+        const adminData = adminDoc.data();
+        console.log(adminData);
+        dispatch({ type: "LOGIN", payload: adminData });
+      } catch (error) {
+        console.error("Error getting document:", error);
+      }
 
-       
-      nav("/")
+      nav("/");
       setError(false); // Reset error state on successful login
     } catch (error) {
       setLoading(false);
       console.log(error);
       setError(true);
     }
-   
   };
 
-
-
-   
   return (
     <div class="flex items-center justify-center h-screen border bg-purple-200">
-      <div class="flex flex-col items-center justify-center border  w-2/5 h-5/6 relative bg-white rounded ">
-        <span class=" text-5xl font-mono absolute top-8 text-purple-700">
+      <div class="flex flex-col items-center  justify-center border w-4/5 md:w-2/5 h-5/6 relative bg-white rounded ">
+        <span class=" lg:text-5xl md:text-3xl text-2xl font-mono absolute lg:top-8 md:top-12 top-16 text-purple-700">
           Admin Login
         </span>
         <form
-          className="flex flex-col items-center gap-4 text-lg "
+          className="flex flex-col items-center lg:gap-4 md:gap-2 gap-2 lg:text-lg text-sm "
           onSubmit={handleLogin} // Renamed from HandleLogin to follow camelCase convention
         >
           <input
@@ -81,7 +74,7 @@ console.log(adminData);
               className="border border-purple-900 px-6 flex items-center justify-between py-1  rounded bg-purple-400 text-white"
               type="submit"
             >
-              <CircularProgress color="inherit"  size={22}/>
+              <CircularProgress color="inherit" size={22} />
             </button>
           ) : (
             <button

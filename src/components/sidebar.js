@@ -10,32 +10,49 @@ import HubIcon from "@mui/icons-material/Hub";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { Link } from "react-router-dom";
 import { useContext } from "react";
 import ThemeContext from "../context/themecontext";
 import { AuthContext } from "../context/authcontext";
+import { Link } from "react-router-dom";
+import SideContext from "../context/sideContext";
+import CloseIcon from "@mui/icons-material/Close";
 const Sidebar = () => {
   const { currentUser: admin } = useContext(AuthContext);
   const { darkMode } = useContext(ThemeContext);
-const { dispatch } = useContext(AuthContext);
-  const logout = ()=>{
-   
+  const { open, setOpen } = useContext(SideContext);
+  const { dispatch } = useContext(AuthContext);
+  const logout = () => {
     dispatch({ type: "LOGOUT" });
-  }
+  };
   return (
-    <div class="border border-r">
-      <Link to="/">
-        <h1
-          class={` ${
-            darkMode ? " text-gray-200" : " text-purple-700"
-          } p-4 font-bold text-3xl flex justify-center `}
-        >
-          {admin.organisation}
-        </h1>
-      </Link>
+    <div
+      class={`max-h-screen lg:w-[20%] z-10 md:z-0 overflow-y-scroll ${
+        open ? " animate-fadeIn flex absolute l-0 bg-white" : "hidden md:flex"
+      } border border-r    flex-col`}
+    >
       <hr class="h-2"></hr>
       <ul class="p-2 pl-5 ">
-        <p class={`text-xs ${darkMode ? "text-white" : "text-black"}`}>MAIN</p>
+        <p
+          class={`text-xs flex items-center justify-between ${
+            darkMode ? "text-white" : "text-black"
+          }`}
+        >
+          MAIN
+          <div
+            class={`p-3 md:hidden ${
+              darkMode
+                ? "hover:bg-slate-500 rounded text-white"
+                : "hover:bg-purple-100"
+            } cursor-pointer flex items-center`}
+          >
+            <CloseIcon
+              style={{ color: "#6b21a8" }}
+              onClick={() => {
+                setOpen(!open);
+              }}
+            />
+          </div>
+        </p>
         <li
           class={`p-3 ${
             darkMode

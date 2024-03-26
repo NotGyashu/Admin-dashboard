@@ -1,23 +1,21 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns,productCols } from "../datasourceTable";
+import { userColumns, productCols } from "../datasourceTable";
 import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import ThemeContext from "../context/themecontext";
-import { collection, } from "firebase/firestore";
+import { collection } from "firebase/firestore";
 import { db } from "../firebase";
 import { doc, deleteDoc, onSnapshot } from "firebase/firestore";
 
 export const Datatable = () => {
- 
-
   const firstPath = window.location.pathname.split("/")[2];
-  const firstPathSegment = firstPath==="users"?"users":"products"
-  const firstPathSegment2 = firstPath==="users"?"customers":"products"
+  const firstPathSegment = firstPath === "users" ? "users" : "products";
+  const firstPathSegment2 = firstPath === "users" ? "customers" : "products";
   const firstPathSegment3 =
     firstPath === "users"
       ? Object.values(userColumns)
       : Object.values(productCols);
-  const link = firstPathSegment==="users"?"/users/new":"/products/new";
+  const link = firstPathSegment === "users" ? "/users/new" : "/products/new";
 
   const { darkMode } = useContext(ThemeContext);
   const [data, setData] = useState([]);
@@ -33,7 +31,6 @@ export const Datatable = () => {
           list.push({ id: doc.id, ...doc.data() });
         });
         setData(list);
-      
       },
       (error) => {
         console.log(error);
@@ -43,8 +40,7 @@ export const Datatable = () => {
     return () => {
       unsub();
     };
-  }, [firstPathSegment,data]);
-
+  }, [firstPathSegment, data]);
 
   //delete a entry from db
   const Handledelete = async (id) => {
@@ -60,7 +56,9 @@ export const Datatable = () => {
       width: 170,
       renderCell: (params) => {
         return (
-          <div class={`flex items-center gap-8`}>
+          <div
+            class={`flex items-center gap-8 w-full max-h-screen overflow-y-scroll`}
+          >
             <Link to="/users/1234">
               <div class=" text-blue-500 border p-1 rounded-md cursor-pointer bg-white">
                 view

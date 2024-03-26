@@ -5,12 +5,17 @@ import Sidebar from "../components/sidebar";
 const List = () => {
 
   return (
-    <div class="grid grid-cols-6 h-full ">
-      <Sidebar  />
-      <div class="col-span-5">
+    <div class=" w-screen max-h-screen  ">
+      <div className="w-full">
         <Navbar />
-        <hr></hr>
-        <Datatable />
+        <hr />
+      </div>
+
+      <div class="flex w-full">
+        <Sidebar />
+        <div className="lg:w-[80%]  w-full max-h-screen flex-col flex overflow-y-scroll">
+          <Datatable />
+        </div>
       </div>
     </div>
   );

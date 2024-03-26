@@ -2,12 +2,7 @@ import Navbar from "../components/navbar";
 import Sidebar from "../components/sidebar";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import { useContext, useEffect, useState } from "react";
-import {
-  addDoc,
-  collection,
-  serverTimestamp,
-
-} from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db, storage } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -15,8 +10,7 @@ import { productInputs } from "../formsource";
 import { AuthContext } from "../context/authcontext";
 
 const New = ({ inputs, title }) => {
-
-  const {currentUser:admin} = useContext(AuthContext)
+  const { currentUser: admin } = useContext(AuthContext);
   const [file, setFile] = useState(null);
   const [data, setData] = useState({});
   const [per, setPer] = useState(null);
@@ -44,8 +38,8 @@ const New = ({ inputs, title }) => {
               case "running":
                 console.log("Upload is running");
                 break;
-                default:
-                  console.log("default");
+              default:
+                console.log("default");
             }
           },
           (error) => {
@@ -82,15 +76,12 @@ const New = ({ inputs, title }) => {
     };
 
     const newUser = async () => {
-    
-          await addDoc(collection(db, "users"), {
-            ...data,
-            timeStamp: serverTimestamp(),
-          });
+      await addDoc(collection(db, "users"), {
+        ...data,
+        timeStamp: serverTimestamp(),
+      });
 
-          handleNavigateBack();
-        
-    
+      handleNavigateBack();
     };
 
     const newProduct = async () => {
@@ -114,69 +105,74 @@ const New = ({ inputs, title }) => {
   };
 
   return (
-    <div class="grid grid-cols-6 h-full ">
-      <Sidebar admin={admin} />
-      <div class="col-span-5">
+    <div class="w-screen max-h-screen ">
+      <div className="w-full">
         <Navbar admin={admin} />
-        <hr></hr>
-        <div class=" box-shadow m-4 text-xl text-gray-300 rounded p-2 box-shadow">
-          {title}
-        </div>
-        <div class=" grid grid-cols-3 gap-2   justify-around m-4 box-shadow p-2 ">
-          <div class="border col-span-1 items-center justify-center flex ">
-            <img
-              src={
-                file
-                  ? URL.createObjectURL(file)
-                  : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7RvHVaAP5IE38i3GnBxUDfxuVh2rEyaWgqg&usqp=CAU"
-              }
-              alt="img"
-              class="h-40 w-40  "
-            ></img>
-          </div>
-          <div class=" col-span-2 border p-3 relative">
-            <form
-              class="flex flex-wrap gap-10 items-center "
-              onSubmit={HandleAdd}
-            >
-              <div class="my-2 w-2/5">
-                image:
-                <label htmlFor="file">
-                  <DriveFolderUploadIcon />
-                </label>
-                <input
-                  type="file"
-                  id="file"
-                  onChange={(e) => setFile(e.target.files[0])}
-                  class=" hidden cursor-pointer focus: outline-none"
-                />
-              </div>
-              {inputs.map((input) => (
-                <div class="my-0 w-2/5" key={input.id}>
-                  <label>{input.label}</label> <br></br>
-                  <input
-                    type={input.type}
-                    placeholder={input.placeholder}
-                    class="  text-gray-400 focus: outline-none"
-                    onChange={serverInput}
-                    id={input.id}
-                  />
-                  <hr></hr>
-                  <hr></hr>
-                </div>
-              ))}
+        <hr />
+      </div>
 
-              <button
-                className={`text-white justify-center items-center rounded w-40 h-7 px-4 ${
-                  per !== null && per < 100
-                    ? "bg-purple-200 cursor-not-allowed"
-                    : "bg-purple-800"
-                }`}
-                type="submit"
+      <div class="flex w-full">
+        <Sidebar admin={admin} />
+        <div className="lg:w-[80%]  w-full max-h-screen flex-col flex overflow-y-scroll">
+          <div class=" box-shadow m-4 text-xl text-gray-300 rounded p-2 box-shadow">
+            {title}
+          </div>
+          <div class=" grid grid-cols-3 gap-2   justify-around m-4 box-shadow p-2 ">
+            <div class="border  lg:col-span-1 col-span-3 items-center justify-center flex ">
+              <img
+                src={
+                  file
+                    ? URL.createObjectURL(file)
+                    : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7RvHVaAP5IE38i3GnBxUDfxuVh2rEyaWgqg&usqp=CAU"
+                }
+                alt="img"
+                class="md:w-40 w-28  "
+              ></img>
+            </div>
+            <div class=" lg:col-span-2 col-span-3 border p-3 relative">
+              <form
+                class="flex flex-wrap flex-col md:flex-row gap-10 items-center "
+                onSubmit={HandleAdd}
               >
-                Send
-              </button>
-            </form>
+                <div class="my-2  w-4/5 md:w-2/5 p-1 ">
+                  image:
+                  <label htmlFor="file">
+                    <DriveFolderUploadIcon />
+                  </label>
+                  <input
+                    type="file"
+                    id="file"
+                    onChange={(e) => setFile(e.target.files[0])}
+                    class=" hidden cursor-pointer focus: outline-none"
+                  />
+                </div>
+                {inputs.map((input) => (
+                  <div class="my-0 w-4/5 md:w-2/5 p-1 " key={input.id}>
+                    <label>{input.label}</label> <br></br>
+                    <input
+                      type={input.type}
+                      placeholder={input.placeholder}
+                      class="  text-gray-400 focus: outline-none"
+                      onChange={serverInput}
+                      id={input.id}
+                    />
+                    <hr></hr>
+                    <hr></hr>
+                  </div>
+                ))}
+
+                <button
+                  className={`text-white justify-center items-center rounded w-40 h-7 px-4 ${
+                    per !== null && per < 100
+                      ? "bg-purple-200 cursor-not-allowed"
+                      : "bg-purple-800"
+                  }`}
+                  type="submit"
+                >
+                  Send
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>

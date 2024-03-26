@@ -62,20 +62,21 @@ export const List = () => {
     },
   ];
 
-
   return (
     <div
-      class={`m-3 rounded-sm ${darkMode ? "bg-black text-white" : "bg-white"}`}
+      class={`m-3  text-sm  rounded-sm overflow-x-scroll ${
+        darkMode ? "bg-black text-white" : "bg-white"
+      }`}
     >
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead
-            class={`m-3 border rounded-sm ${
+            class={`m-3 text-sm border rounded-sm ${
               darkMode ? "bg-[#200c30] text-white" : "bg-white"
             }`}
           >
             <TableRow>
-              <TableCell class="p-4">Tracking ID</TableCell>
+              <TableCell class="p-4 ">Tracking ID</TableCell>
               <TableCell class="">Product</TableCell>
               <TableCell class="">Customer</TableCell>
               <TableCell class="tableCell">Date</TableCell>
@@ -92,7 +93,9 @@ export const List = () => {
                   darkMode ? "bg-[#200c30] text-white" : "bg-white"
                 }`}
               >
-                <TableCell class="p-4">{row.id}</TableCell>
+                <TableCell class="p-4 text-sm">
+                  {row.id}
+                </TableCell>
 
                 <TableCell class="p-4">
                   <div class="flex items-center">
@@ -104,10 +107,18 @@ export const List = () => {
                     {row.product}
                   </div>
                 </TableCell>
-                <TableCell class="p-4">{row.customer}</TableCell>
-                <TableCell class="p-4">{row.date}</TableCell>
-                <TableCell class="p-4">{row.amount}</TableCell>
-                <TableCell class="p-4">{row.method}</TableCell>
+                <TableCell class="p-4 text-sm">
+                  {row.customer}
+                </TableCell>
+                <TableCell class="p-4 text-sm">
+                  {row.date}
+                </TableCell>
+                <TableCell class="p-4 text-sm">
+                  {row.amount}
+                </TableCell>
+                <TableCell class="p-4 text-sm">
+                  {row.method}
+                </TableCell>
                 <TableCell
                   style={{
                     color:

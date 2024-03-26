@@ -2,12 +2,7 @@ import { useState } from "react";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import { registerInput } from "../formsource";
 import { useEffect } from "react";
-import {
-
-  doc,
-  serverTimestamp,
-  setDoc,
-} from "firebase/firestore";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db, storage } from "../firebase";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +11,7 @@ const Register = () => {
   const [file, setFile] = useState(null);
   const [data, setData] = useState({});
   const [per, setPer] = useState(null);
-   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const uploadFile = () => {
@@ -70,58 +65,56 @@ const Register = () => {
     setData((prev) => ({ ...prev, [id]: value }));
   };
 
-  
-
-  const Register= async(e)=>{
-    e.preventDefault()
+  const Register = async (e) => {
+    e.preventDefault();
     const loginBack = () => {
       console.log("worked");
       navigate("/login");
     };
 
-      try{
-              const newUserCredential = await createUserWithEmailAndPassword(
-          auth,
-          data.email,
-          data.password
-        );
-        const user = newUserCredential.user;
+    try {
+      const newUserCredential = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+      const user = newUserCredential.user;
 
-        if (user) {
-          
-          
-          await setDoc(doc(db, "admin", user.uid), {
-            ...data,
-            timeStamp: serverTimestamp(),
-          });
+      if (user) {
+        await setDoc(doc(db, "admin", user.uid), {
+          ...data,
+          timeStamp: serverTimestamp(),
+        });
 
-          loginBack();
-        } else {
-          console.error("User object not available");
-        }
-      }catch(err){
-        console.log("error in registering",err)
+        loginBack();
+      } else {
+        console.error("User object not available");
       }
-  }
+    } catch (err) {
+      console.log("error in registering", err);
+    }
+  };
 
   return (
-    <div class="flex items-center justify-center h-screen  bg-purple-200">
-      <div class="w-3/4  h-[90%]  bg-white rounded p-8 items-center flex flex-col gap-2">
-        <div class=" text-5xl font-mono  text-purple-700 ">Register Here</div>
+    <div class="flex items-center justify-center min-h-screen p-10 md:p-6 p-3  bg-purple-200">
+      <div class="lg:w-3/4 md:w-[80%] w-[90%]  h-[90%]  bg-white rounded p-8 items-center flex flex-col gap-2">
+        <div class=" lg:text-5xl md:text-3xl text-2xl font-mono  text-purple-700 ">
+          Register Here
+        </div>
 
-        <div class=" items-center justify-center flex border h-max">
-          <div class="border items-center justify-center flex h-full ">
+        <div class=" items-center justify-center lg:flex-row flex flex-col border h-max">
+          <div class="border items-center justify-center flex ">
             <img
               src={
                 file
                   ? URL.createObjectURL(file)
                   : "https://i.pinimg.com/originals/7c/ee/6f/7cee6fa507169843e3430a90dd5377d4.jpg"
               }
-              class=" w-[50vw] h-[30vh] px-2 rounded-full "
+              class=" md:h-[30vw] lg:h-[15vw] h-[30vh] lg:w-[39vw] px-2 rounded-full "
               alt="img"
             ></img>
           </div>
-          <form class="flex flex-wrap gap-10 p-4 border" onSubmit={Register}>
+          <form class="md:flex flex-wrap gap-10 p-4 border" onSubmit={Register}>
             <div class="w-2/5">
               image:
               <label htmlFor="file">
