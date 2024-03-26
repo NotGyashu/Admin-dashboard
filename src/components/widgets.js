@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from "react";
 import ThemeContext from "../context/themecontext";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
+import { Link } from "react-router-dom";
 export const Widgets = ({ type }) => {
   const { darkMode } = useContext(ThemeContext);
   let data;
@@ -20,6 +21,7 @@ export const Widgets = ({ type }) => {
         title: "USERS",
         isMoney: false,
         link: "see all users",
+        move:'users',
         icon: (
           <Person2OutlinedIcon
             class="flex self-end h-5 rounded-md bg-red-300 "
@@ -34,6 +36,7 @@ export const Widgets = ({ type }) => {
         title: "ORDERS",
         isMoney: false,
         link: "view all orders",
+        move: "products",
         icon: (
           <ShoppingCartOutlinedIcon class="flex self-end h-5 bg-blue-400 rounded-md" />
         ),
@@ -44,6 +47,7 @@ export const Widgets = ({ type }) => {
         title: "EARNINGS",
         isMoney: true,
         link: " view total earnings",
+        move: "users",
         icon: (
           <MonetizationOnOutlinedIcon class="flex self-end h-5 rounded-md bg-green-400" />
         ),
@@ -54,6 +58,7 @@ export const Widgets = ({ type }) => {
         title: "BALANCE",
         isMoney: true,
         link: "get total balance",
+        move: "users",
         icon: (
           <AccountBalanceWalletOutlinedIcon class="flex self-end h-5 rounded-md bg-orange-300" />
         ),
@@ -110,13 +115,13 @@ export const Widgets = ({ type }) => {
           {data.isMoney && "$"}
           {amount}
         </span>
-        <span
+        <Link to={`${data.move}`}
           class={`text-sm custom-underline ${
             darkMode ? "text-white" : "text-black"
           }`}
         >
           {data.link}
-        </span>
+        </Link>
       </div>
       <div
         class={`flex flex-col justify-between ${
