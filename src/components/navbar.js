@@ -4,15 +4,13 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
-import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ThemeContext from "../context/themecontext";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../context/authcontext";
 import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import SideContext from "../context/sideContext";
-import Sidebar from "./sidebar";
+
 const Navbar = () => {
   const { currentUser: admin } = useContext(AuthContext);
   const { darkMode, setDarkMode } = useContext(ThemeContext);
@@ -63,7 +61,7 @@ const Navbar = () => {
           <SearchOutlinedIcon />
         </div>
       </div>
-      <div class=" hidden md:flex mr-5 items-center justify-center border">
+      <div class=" hidden md:flex mr-5 items-center justify-center ">
         <div
           class={`ml-4 ${
             darkMode

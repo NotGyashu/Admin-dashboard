@@ -48,7 +48,10 @@ const Login = () => {
   return (
     <div class="flex items-center justify-center h-screen border bg-purple-200">
       <div class="flex flex-col items-center  justify-center border w-4/5 md:w-2/5 h-5/6 relative bg-white rounded ">
-        <span class=" lg:text-5xl md:text-3xl text-2xl font-mono absolute lg:top-8 md:top-12 top-16 text-purple-700">
+        <span
+          class=" 9
+          lg:text-5xl md:text-3xl text-2xl font-mono absolute lg:top-8 md:top-12 top-32     text-purple-700"
+        >
           Admin Login
         </span>
         <form

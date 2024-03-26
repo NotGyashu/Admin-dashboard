@@ -96,26 +96,29 @@ const Register = () => {
   };
 
   return (
-    <div class="flex items-center justify-center min-h-screen p-10 md:p-6 p-3  bg-purple-200">
+    <div class="flex items-center justify-center min-h-screen  md:p-6 p-3  bg-purple-200">
       <div class="lg:w-3/4 md:w-[80%] w-[90%]  h-[90%]  bg-white rounded p-8 items-center flex flex-col gap-2">
         <div class=" lg:text-5xl md:text-3xl text-2xl font-mono  text-purple-700 ">
           Register Here
         </div>
 
-        <div class=" items-center justify-center lg:flex-row flex flex-col border h-max">
-          <div class="border items-center justify-center flex ">
+        <div class=" items-center justify-center lg:flex-row flex flex-col border h-max ">
+          <div class=" items-center justify-center flex ">
             <img
               src={
                 file
                   ? URL.createObjectURL(file)
                   : "https://i.pinimg.com/originals/7c/ee/6f/7cee6fa507169843e3430a90dd5377d4.jpg"
               }
-              class=" md:h-[30vw] lg:h-[15vw] h-[30vh] lg:w-[39vw] px-2 rounded-full "
+              class=" md:h-[30vw] lg:h-[15vw] h-[25vh] lg:w-[39vw] px-2 rounded-full "
               alt="img"
             ></img>
           </div>
-          <form class="md:flex flex-wrap gap-10 p-4 border" onSubmit={Register}>
-            <div class="w-2/5">
+          <form
+            class="flex flex-wrap flex-col md:flex-row gap-10 items-center p-4 lg:border"
+            onSubmit={Register}
+          >
+            <div class="w-4/5 md:w-2/5 ">
               image:
               <label htmlFor="file">
                 <DriveFolderUploadIcon style={{ color: "#9003fc" }} />
@@ -128,11 +131,11 @@ const Register = () => {
               />
             </div>
             {registerInput.map((input) => (
-              <div key={input.id} class="w-2/5 ">
+              <div key={input.id} class="w-4/5 md:w-2/5  ">
                 <label class=" ">{input.label}</label> <br></br>
                 <input
                   type={input.type}
-                  class="  focus: outline-none font-light"
+                  class="  focus: outline-none font-light w-4/5 md:w-2/5 "
                   id={input.id}
                   onChange={serverInput}
                 />

@@ -13,7 +13,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useContext } from "react";
 import ThemeContext from "../context/themecontext";
 import { AuthContext } from "../context/authcontext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SideContext from "../context/sideContext";
 import CloseIcon from "@mui/icons-material/Close";
 const Sidebar = () => {
@@ -21,12 +21,13 @@ const Sidebar = () => {
   const { darkMode } = useContext(ThemeContext);
   const { open, setOpen } = useContext(SideContext);
   const { dispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
   const logout = () => {
     dispatch({ type: "LOGOUT" });
   };
   return (
     <div
-      class={`max-h-screen lg:w-[20%] z-10 md:z-0 overflow-y-scroll ${
+      class={`max-h-screen border-r-2 lg:w-[20%] z-10 md:z-0 overflow-y-scroll ${
         open ? " animate-fadeIn flex absolute l-0 bg-white" : "hidden md:flex"
       } border border-r    flex-col`}
     >
@@ -59,6 +60,10 @@ const Sidebar = () => {
               ? "hover:bg-slate-500 rounded text-white"
               : "hover:bg-purple-100"
           } cursor-pointer flex items-center`}
+          onClick={() => {
+            navigate("/");
+            setOpen(!open);
+          }}
         >
           <DashboardIcon style={{ color: "#6b21a8" }} />
           &nbsp; Dashboard
@@ -71,6 +76,9 @@ const Sidebar = () => {
                 ? "hover:bg-slate-500 rounded text-white"
                 : "hover:bg-purple-100"
             } cursor-pointer flex items-center`}
+            onClick={() => {
+              setOpen(!open);
+            }}
           >
             <PersonIcon style={{ color: "#6b21a8" }} />
             &nbsp;Users
@@ -83,6 +91,9 @@ const Sidebar = () => {
                 ? "hover:bg-slate-500 rounded text-white"
                 : "hover:bg-purple-100"
             } cursor-pointer flex items-center`}
+            onClick={() => {
+              setOpen(!open);
+            }}
           >
             <Inventory2Icon style={{ color: "#6b21a8" }} />
             &nbsp;Products
