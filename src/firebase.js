@@ -13,7 +13,7 @@ const apiKey = process.env.REACT_APP_FIREBASE_KEY?.toString();
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA_xvH3AfqEkO_9SWFKIldaUz6HsI0e-o4",
+  apiKey: apiKey,
   authDomain: "admindashboard-419f4.firebaseapp.com",
   projectId: "admindashboard-419f4",
   storageBucket: "admindashboard-419f4.appspot.com",
