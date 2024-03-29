@@ -14,7 +14,7 @@ import Register from "./pages/register";
 export const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   const { currentUser } = useContext(AuthContext);
-  const [ open, setOpen ] = useState(false)
+  const [open, setOpen] = useState(false);
 
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to="/login" />;
@@ -24,7 +24,7 @@ export const App = () => {
     <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
       <SideContext.Provider value={{ open, setOpen }}>
         <div className={`${darkMode ? " bg-[#200c30]" : "bg-white"}`}>
-          <BrowserRouter basename="/Admin-dashboard">
+          <BrowserRouter>
             <Routes>
               <Route path="/">
                 <Route
